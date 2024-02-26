@@ -26,13 +26,13 @@ class ProductController extends Controller
 
     public function listProduct()
     {
-        $query = Product::select('id','title','price','description','user_id')->with('user:id,name');
+        $query = Product::select('id','title','price','description','user_id','qnt')->with('user:id,name');
         if(Auth::user()->role->name != 'admin')
             $query = $query->where('user_id',Auth::id());
 
         $products = $query->get();
 
-        return response($products,200);
+        return response(['status'=>200,'data'=>$products],200);
     }
 
     public function showProduct($id)

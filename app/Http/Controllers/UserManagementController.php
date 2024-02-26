@@ -26,8 +26,7 @@ class UserManagementController extends Controller
 
     public function userList()
     {
-//        $users = User::select('id','name','email')->get();
-        $users = User::all('id','name','email');
+        $users = User::select('id','name','email')->with('orders')->get();
         return response($users,200);
     }
 

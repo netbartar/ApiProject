@@ -7,8 +7,10 @@ use App\Listeners\CreateProfileListener;
 use App\Listeners\GenerateReportListener;
 use App\Listeners\SendEmailListener;
 use App\Listeners\WelcomeToUserListener;
+use App\Models\Order;
 use App\Models\Role;
 use App\Models\User;
+use App\Observers\OrderObserver;
 use App\Observers\RoleObserver;
 use App\Observers\UserObserver;
 use Illuminate\Auth\Events\Registered;
@@ -42,6 +44,7 @@ class EventServiceProvider extends ServiceProvider
     {
         User::observe(UserObserver::class);
         Role::observe(RoleObserver::class);
+        Order::observe(OrderObserver::class);
     }
 
     /**

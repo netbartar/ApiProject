@@ -6,6 +6,7 @@ use App\Http\Controllers\UserManagementController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\OrderController;
 
 
 /*
@@ -59,6 +60,13 @@ Route::middleware('auth:sanctum')->group(function (){
         });
     });
 
+    Route::prefix('OrderManagement')->group(function (){
+       Route::controller(OrderController::class)->group(function (){
+          Route::post('order/create','createOrder');
+       });
+    });
+
+
 //    Route::controller(PostController::class)->group(function (){
 //        Route::prefix('PostManagement')->group(function (){
 //            Route::get('posts','postList');
@@ -69,6 +77,5 @@ Route::middleware('auth:sanctum')->group(function (){
 //        });
 //    });
 });
-
 
 
