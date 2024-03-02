@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Events\CreateOrderEvent;
 use App\Events\NewRegisterEvent;
 use App\Listeners\CreateProfileListener;
 use App\Listeners\GenerateReportListener;
+use App\Listeners\ReduceQntListener;
 use App\Listeners\SendEmailListener;
 use App\Listeners\WelcomeToUserListener;
 use App\Models\Order;
@@ -34,6 +36,10 @@ class EventServiceProvider extends ServiceProvider
             GenerateReportListener::class,
 //            SendEmailListener::class,
             WelcomeToUserListener::class
+        ],
+        CreateOrderEvent::class => [
+            SendEmailListener::class,
+            ReduceQntListener::class
         ]
     ];
 

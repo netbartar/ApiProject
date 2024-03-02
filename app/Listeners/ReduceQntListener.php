@@ -6,7 +6,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Log;
 
-class SendEmailListener
+class ReduceQntListener
 {
     /**
      * Create the event listener.
@@ -21,6 +21,8 @@ class SendEmailListener
      */
     public function handle(object $event): void
     {
-        Log::info('Send email');
+        $order = $event->order;
+        $order->product->qnt -= $order->qnt;
+        $order->product->save();
     }
 }

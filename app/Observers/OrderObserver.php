@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Events\CreateOrderEvent;
 use App\Models\Order;
 use App\Models\Product;
 
@@ -12,12 +13,11 @@ class OrderObserver
      */
     public function created(Order $order): void
     {
-//        $product = Product::find($order->product_id);
-//        $product->qnt = $product->qnt - $order->qnt;
-//        $product->save();
+        if($order->qnt > 5 )
+            CreateOrderEvent::dispatch($order,'jsdal');
+//        CreateOrderEvent::dispatchIf($order->qnt > 5,$order,'x');
+//        event(new CreateOrderEvent($order,'s'));
 
-        $order->product->qnt -= $order->qnt;
-        $order->product->save();
     }
 
     /**
