@@ -10,9 +10,18 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'product_id', 'user_id', 'qnt', 'total_price', 'flag'
-    ];
+//    protected $fillable = [
+//        'product_id', 'user_id', 'qnt', 'total_price', 'flag'
+//    ];
+
+    protected $guarded = [];
+
+//
+//    protected $casts = [
+//        'qnt' => 'float'
+//    ];
+
+//    public $timestamps = false;
 
     public function product()
     {

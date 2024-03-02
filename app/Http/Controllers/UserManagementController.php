@@ -27,13 +27,35 @@ class UserManagementController extends Controller
     public function userList()
     {
         $users = User::select('id','name','email')->with('orders')->get();
+//        $users = User::select('id','name')->orderBy('email','desc')->get();
+//        $users = User::take(100)->get();
+//            $users = User::skip(20)->limit(10)->get();
         return response($users,200);
     }
 
     public function userDetails($id)
     {
-        $user = User::findOrFail($id);
+
+//        $user = User::find(1);
+//        $user = User::where('email','admin@test.com')->first();
+//        $user = User::firstWhere('email','admin@test.com');
+//        $user = User::findOrFail($id);
+
+//        $user = User::findOr($id,function (){
+//            abort(404,'user not found');
+//        });
+//        $user = User::where('email','admin1@test.com')->firstOr(function (){
+//            abort(404,'user not found');
+//        });
+
+//        $user = User::where('email','admin@test.com')->first();
+//        if($user)
+//            return response($user,200);
+
+//        $user = User::findOrFail($id);
+        $user = User::where('email','admin@test.com')->firstOrFail();
         return response($user,200);
+
     }
 
     public function userUpdate(UserUpdateRequest $request, $id)

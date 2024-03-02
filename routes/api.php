@@ -31,6 +31,7 @@ Route::post('reset-password',[AuthenticationController::class,'resetPassword']);
 Route::middleware('auth:sanctum')->group(function (){
 
     Route::delete('role/{id}', [\App\Http\Controllers\RoleController::class,'deleteRole']);
+    Route::post('role/create', [\App\Http\Controllers\RoleController::class,'storeRole']);
 
     Route::controller(UserManagementController::class)->group(function (){
         Route::prefix('UserManagement')->group(function (){

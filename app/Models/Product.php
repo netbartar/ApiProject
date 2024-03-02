@@ -12,6 +12,14 @@ class Product extends Model
 
     protected $fillable =  ['title', 'description', 'price', 'user_id', 'qnt'];
 
+//    protected $hidden = [
+//        'description',
+//        'qnt'
+//    ];
+
+//    const CREATED_AT = 'creation_at';
+//    const UPDATED_AT = 'edit_at';
+
     public function user()
     {
         return $this->belongsTo(User::class);
