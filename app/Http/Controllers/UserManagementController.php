@@ -10,6 +10,7 @@ use App\Models\Scopes\IsActiveScope;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
@@ -33,7 +34,14 @@ class UserManagementController extends Controller
 //
 //        $users = User::with('orders')->take(100)->get();
 
-        $users = User::withoutGlobalScope(IsActiveScope::class)->get();
+        $users = Cache::get('user-list3');
+        if(!$users)
+        {
+            $users = User::all();
+            Cache::put('user-list3',$users);
+        }
+
+
 //        $user_count = count($users);
 
 //        $user_count = User::count();
@@ -106,7 +114,7 @@ class UserManagementController extends Controller
 //        ];
 
 //        $new_users = collect($users)->where('name','X');
-        return response($users,200);
+//        return response($users,200);
     }
 
     public function userDetails($id)

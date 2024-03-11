@@ -4,7 +4,10 @@ namespace App\Observers;
 
 use App\Events\NewRegisterEvent;
 use App\Models\User;
+use Illuminate\Cache\Events\CacheHit;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
+use PhpParser\Node\Stmt\Case_;
 
 class UserObserver
 {
@@ -13,6 +16,10 @@ class UserObserver
      */
     public function created(User $user): void
     {
+        $users = User::all();
+        Cache::forget('user-list3');
+        Cache::put('user-list3',$users);
+//        Cache::add('user-list3',$user);
         NewRegisterEvent::dispatch();
     }
 
