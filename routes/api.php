@@ -38,7 +38,10 @@ Route::middleware('auth:sanctum')->group(function (){
             Route::get('user/{id}','userDetails')
                 ->whereNumber('id');
             Route::put('user/{id}','userUpdate');
+            Route::post('user/multi/update','multiUserUpdate');
             Route::delete('user/{id}','userDelete');
+            Route::get('user/restore/{id}','restoreTrashed');
+            Route::delete('user/force-delete/{id}','forceDeleteUser');
             Route::middleware('admin')->group(function (){
                 Route::get('users','userList');
                 Route::post('user/create','userStore');
